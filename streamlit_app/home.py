@@ -64,23 +64,23 @@ def selectLabel():
     
     labels = dict.fromkeys(options, 'yes')
     
-    st.write(f'#### You selected for yes: {labels}' )
+    # st.write(f'#### You selected for yes: {labels}' )
     
     labels = dict.fromkeys(listA, 'no')
     
-    st.write(f'#### You selected for no: {labels}' )
+    # st.write(f'#### You selected for no: {labels}' )
 
 
-    labels['seniorcitizen'] = senior_citizen = st.checkbox(
+    labels['seniorcitizen'] = st.checkbox(
         'Senior Citizon',
         (0)
         
         )
-    st.write(int(senior_citizen))
+    # st.write(int(senior_citizen))
 
 
 
-    labels['gender'] = gender = st.radio(
+    labels['gender'] = st.radio(
         "Please select a gender",
         ('male', 'female')
     )
@@ -91,34 +91,34 @@ def selectLabel():
     #     labels['gender']  = 0
     
 
-    st.write(gender)
+    # st.write(gender)
 
-    labels['internetservice'] = internet_service = st.radio(
+    labels['internetservice'] = st.radio(
         "Internet service type",
         ('dsl', 'fiber_optic', 'no')
     )
 
-    labels['contract'] = contract = st.radio(
+    labels['contract'] = st.radio(
 
         "Please select contract type",
         ['month-to-month', 'one_year', 'two_year']
     )
 
-    labels['paymentmethod'] = payment_method = st.radio(
+    labels['paymentmethod'] = st.radio(
 
         "Please select a payment method",
         ['electronic_check', 'mailed_check', 'bank_transfer_(automatic)','credit_card_(automatic)']
     )
 
     # st.write('###### ')
-    labels['tenure'] = tenure = st.number_input('Tenure')
-    st.write('Current value : ', tenure)
+    labels['tenure'] = st.number_input('Tenure')
+    st.write('Current value : ', labels['tenure'])
 
-    labels['monthlycharges'] = monthly_charges = st.number_input('Monthly Charges')
-    st.write('Current value : ', monthly_charges)
+    labels['monthlycharges'] = st.number_input('Monthly Charges')
+    st.write('Current value : ', labels['monthlycharges'])
 
-    labels['totalcharges'] = total_charges = st.number_input('Total Charges')
-    st.write('Current value : ', total_charges)
+    labels['totalcharges'] = st.number_input('Total Charges')
+    st.write('Current value : ', labels['totalcharges'])
     
     return labels
 
