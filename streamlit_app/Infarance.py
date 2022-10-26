@@ -1,3 +1,4 @@
+from symbol import return_stmt
 import streamlit as st
 
 import pandas as pd
@@ -60,6 +61,8 @@ def selectLabel():
     )
     st.write(f'#### You selected: {options}' )
     
+    
+
     listA = [i for i in labels_one_hot if i not in options]
     
     labels = dict.fromkeys(options, 'yes')
@@ -69,7 +72,8 @@ def selectLabel():
     labels = dict.fromkeys(listA, 'no')
     
     # st.write(f'#### You selected for no: {labels}' )
-
+    
+    # st.table(labe)
 
     labels['seniorcitizen'] = st.checkbox(
         'Senior Citizon',
@@ -128,15 +132,16 @@ def load_feature_dict():
     
     with open('../feature_dict.json', 'r') as fp:
         train_dict = json.loads(fp.read())
-        dv = DictVectorizer(sparse=False)
-        dv.fit(train_dict)
-    return dv
+    
+    return train_dict    
 
 # converts dictionary to vector
 @st.cache
 def dict_vectorizer(labels):
     #loading train dictionary for feature extraction
-    dv = load_feature_dict()
+    train_dict = load_feature_dict()
+    dv = DictVectorizer(sparse=False)
+    dv.fit(train_dict)
     
     transformed_labels = dv.transform([labels])
     return transformed_labels
@@ -165,13 +170,22 @@ if st.checkbox('Raw Data'):
 #select labels
 labels = selectLabel()
 
+test = labels
+
 # vectorizing labels 
 labels = dict_vectorizer(labels)
 
 # loading ml model
 model = load_model()
 
-st.write(f'Churning probability : {churnPrediction(labels,model)}')    
+st.write(f'## Churning probability : {(churnPrediction(labels,model)*100)}%')    
+
+
+# chart_data = pd.DataFrame(
+#     np.random.randn(50, 3),
+#     columns=["a", "b", "c"])
+
+# st.bar_chart(labels[0])
 
 # options = st.multiselect(
 #     'What are your favorite colors',
